@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prakriti Questionaire</title>
+</head>
+<style>
+  .input {
+    -webkit-appearance: none;
+   /* remove default */
+    display: block;
+    margin: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    vertical-align: middle;
+    box-shadow: hsla(0,0%,100%,.15) 0 1px 1px, inset hsla(0,0%,0%,.5) 0 0 0 1px;
+    background-color: hsla(0,0%,0%,.2);
+    background-image: -webkit-radial-gradient( hsla(200,100%,90%,1) 0%, hsla(200,100%,70%,1) 15%, hsla(200,100%,60%,.3) 28%, hsla(200,100%,30%,0) 70% );
+    background-repeat: no-repeat;
+    -webkit-transition: background-position .15s cubic-bezier(.8, 0, 1, 1),
+      -webkit-transform .25s cubic-bezier(.8, 0, 1, 1);
+    outline: none;
+  }
+  
+  .input:checked {
+    -webkit-transition: background-position .2s .15s cubic-bezier(0, 0, .2, 1),
+      -webkit-transform .25s cubic-bezier(0, 0, .2, 1);
+  }
+  
+  .input:active {
+    -webkit-transform: scale(1.5);
+    -webkit-transition: -webkit-transform .1s cubic-bezier(0, 0, .2, 1);
+  }
+  
+  
+  
+  /* The up/down direction logic */
+  
+  .input,
+  .input:active {
+    background-position: 0 24px;
+  }
+  
+  .input:checked {
+    background-position: 0 0;
+  }
+  
+  .input:checked ~ .input,
+  .input:checked ~ .input:active {
+    background-position: 0 -24px;
+  }
+
+
+  @keyframes shake {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-15px); }
+    50% { transform: translateY(15px); }
+    75% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+  }
+  
+  /* Apply the shake animation to the button when the "shake-button" class is active */
+  .shaking {
+    animation: shake 0.5s ease-in-out infinite;
+  }
+
+  @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400');
+ /* @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light'); */
+ @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Lato:wght@300&display=swap');
+ ::selection {
+	 color: #fff;
+	 background: #9fbe5a;
+}
+ body {
+	 width: 100vw;
+	 height: 100%;
+	 padding-bottom: 50px;
+	 overflow-x: hidden;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+     position: relative;
+	 background: linear-gradient(to bottom, #16a085, #f4d03f) center / cover no-repeat;
+}
+ h1 {
+	 margin-bottom: 35px;
+	 padding: 0 20vw;
+	 font: 400 56px 'Roboto Slab', serif;
+	 font-size: 56px;
+	 text-align: center;
+	 color: #fff;
+}
+ .form__contact {
+	 max-width: 600px;
+     /* height: 533px; */
+     max-height: 530px;
+	 margin: 0 auto;
+	 border-left: 30px solid white;
+	 border-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI0MS44NnB4IiBoZWlnaHQ9IjUyLjMyNnB4IiB2aWV3Qm94PSIwIDAgNDEuODYgNTIuMzI2IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA0MS44NiA1Mi4zMjYiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0wLDB2MjUuMTYzaDcuMDk3YzAuNTAxLTQuOTg5LDQuNzEyLTguODg0LDkuODMzLTguODg0YzUuNDU4LDAsOS44ODQsNC40MjUsOS44ODQsOS44ODRzLTQuNDI1LDkuODg0LTkuODg0LDkuODg0Yy01LjEyMSwwLTkuMzMyLTMuODk1LTkuODMzLTguODg0SDB2MjUuMTYzaDQxLjg2VjBIMHoiLz48L3N2Zz4=) 5% 100% repeat;
+	 border-image-width: 0px 0px 0px 30px;
+	 transform: translateY(100%);
+     perspective: 1000px;
+	 animation: init 1s ease-in-out forwards;
+}
+ .form__contact fieldset {
+	 position: relative;
+	 margin: 0;
+	 max-height: 450px;
+	 padding: 45px 30px 40px 80px;
+	 border: none;
+	 border-radius: 0 20px 20px 0;
+	 font: 24px 'Shadows Into Light', cursive;
+	 background: #fff linear-gradient(rgba(0, 0, 0, .1) 1px, transparent 0) 0 20px / 100% 40px;
+}
+ /* .form__contact fieldset:after {
+	 position: relative;
+	 top: 0;
+	 left: 50px;
+	 content: '';
+	 height: 100%;
+	 width: 1px;
+	 border-left: double #e08183;
+} */
+ .form__contact p {
+	 margin: 0 0 40px 0;
+	 line-height: 40px;
+     font-size: larger;
+	 color: #333;
+}
+ .form__contact span {
+    /* text-decoration-line: line-through; */
+	 position: relative;
+	 line-height: 40px;
+}
+ .form__contact button {
+	 /* margin-top: 40px; */
+	 float: right;
+	 border: none;
+     font-size: larger;
+	 font-family: 'Shadows Into Light', cursive;
+	 color: #e08183;
+	 background: transparent;
+	 cursor: pointer;
+	 transition: transform 0.25s ease;
+}
+ .form__contact button:hover {
+	 transform: translateX(10px);
+}
+ .form__field {
+	 display: inline;
+	 color: #7db665;
+	 outline: none;
+}
+ .form__field:empty {
+	 display: inline-block;
+	 color: #ddd;
+}
+ .form__field:empty:before, .form__field:empty:focus:before {
+	 content: attr(data-placeholder);
+}
+ svg {
+	 display: none;
+}
+ @keyframes init {
+	 75% {
+		 transform: translateY(-20px);
+	}
+	 100% {
+		 transform: translateY(0);
+	}
+}
+ @keyframes do-blur {
+	 0% {
+		 filter: url(#blur4);
+	}
+	 25% {
+		 filter: url(#blur3);
+	}
+	 50% {
+		 filter: url(#blur2);
+	}
+	 75% {
+		 filter: url(#blur1);
+	}
+	 100% {
+		 filter: url(#blur0);
+	}
+}
+
+.front{
+    position: absolute;
+	bottom:5px;
+    z-index: 3;
+    /* top: -1000px; */
+}
+
+.back {
+    position: relative;
+    z-index: 1;
+    top: -540px;
+    /* display: block; */
+    /* visibility: hidden; */
+}
+
+.back fieldset::after {
+    display: block;
+    visibility: hidden;
+}
+
+ .flipp{
+    animation: 2s ease-in-out  fliper;
+ }
+
+ @keyframes fliper {
+    0%{
+        position: relative;
+        top: 0px;
+        /* transform: rotateY(0deg); */
+    }
+    /* 50%{
+        position: absolute;
+        right: 420px;
+     }  */
+    100%{
+        position: relative;
+        top: 3000px;
+        /* transform: rotateY(-180deg); */
+    }
+ }
+
+ span{
+    position: relative;
+    left: 20px; 
+ }
+
+ .flexer{
+    display: flex;
+    flex-direction: row;
+ }
+
+ .texty{
+    text-decoration-line: line-through;
+ }
+
+ .gayab{
+	display: none;
+ }
+</style>
+<script>
+
+</script>
+<body>
+    <div class="wrapper">
+        <h1>Check your Prakriti !!</h1>
+         
+        <form class="form__contact" action="#">
+          <fieldset class="front" id="targett">
+            <p>Hey, Stranger!</p>
+            <p id="question-pallete">What is your body type ??</p>
+            <div class="flexer"><input id="1" name="radio" type="radio" class="input" ><label for="1" id="one">Too Tall / Too Short</label></div>
+            <div class="flexer"><input id="2" name="radio" type="radio" class="input" ><label for="2" id="two">Medium</label></div>
+            <div class="flexer" id="br_ke1"><input id="3" name="radio" type="radio" class="input" ><label for="3" id="three">Short</label></div>
+            
+            <p id="changerr1">Soon you will know your Prakriti. Cheers!</p>
+            <button type="button" id="actionbutton" onclick="displayNextValue()" class=" button button--xlarge" tabindex="4">Next &#187;</button>
+          </fieldset>
+          <fieldset class="back" id="backer">
+            <p>Hey, Stranger!</p>
+            <p id="future-pallete">What is your body type ??</p>
+            <div class="flexer"><input name="radio" type="radio" class="input" ><label id="ek">Lean</label></div>
+            <div class="flexer"><input name="radio" type="radio" class="input" ><label id="do">Average</label></div>
+            <div class="flexer" id="br_ke2"><input name="radio" type="radio" class="input" ><label id="teen">Heavy</label></div>
+        
+            <p id="changerr2">Soon you will know your prakriti!!</p>
+            <button type="button" class="button button--xlarge" tabindex="4">Next &#187;</button>
+          </fieldset>
+        </form>
+      </div>
+      
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+        <defs>
+          <filter id="blur0">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 0" />
+          </filter>
+          <filter id="blur1">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 5" />
+          </filter>
+          <filter id="blur2">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 10" />
+          </filter>
+          <filter id="blur3">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 15" />
+          </filter>
+          <filter id="blur4">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0 20" />
+          </filter>
+        </defs>
+      </svg>
+      
+      <script>
+                  // Define your array of values
+          const targetElement = document.getElementById("targett");
+          const ques_change = document.getElementById("question-pallete");
+          const future_change = document.getElementById("future-pallete");
+          const Op1 = document.getElementById("one");
+          const Op2 = document.getElementById("two");
+          const Op3 = document.getElementById("three");
+          const Fu1 = document.getElementById("ek");
+          const Fu2 = document.getElementById("do");
+          const Fu3 = document.getElementById("teen");
+          const chang1 = document.getElementById("changerr1");
+          const chang2 = document.getElementById("changerr2");
+          const backer = document.getElementById("backer");
+          const lineBreak = "<br>";
+          const div1 = document.getElementById("br_ke1");
+          const div2 = document.getElementById("br_ke2");
+
+
+          const MyQuestion = [             //12
+            {
+                Question: "What is your body type ? ",
+                Option1: "Too Tall / Too Short",
+                Option2: "Medium",
+                Option3: "Short",
+                Quote: "Soon you will know your Prakriti. Cheers!"
+            },
+            {
+                Question: "What is your body-weight type ? ",
+                Option1: "Lean",
+                Option2: "Average",
+                Option3: "Heavy",
+                Quote: "Soon you will know your Prakriti. Cheers!"
+            },
+            {
+                Question: "What is your Skin-type ? ",
+                Option1: "Rough, easily skin gets dark",
+                Option2: "Smooth, Achne/Pimple",
+                Option3: "Bright, Smooth, Attractive",
+                Quote: "Soon you will know your Prakriti. Cheers!"
+            },
+            {
+                Question: "What type of eye you have ? ",
+                Option1: "Sunken, small eyelashes",
+                Option2: "Sharp, penetrating eyes ",
+                Option3: "Big, thick eyelashes",
+                Quote: "Soon you will know your Prakriti. Cheers!"
+            },
+            {
+                Question: "What type of hair you have ? ",
+                Option1: "Dry, Small, Curly",
+                Option2: "Thin, Silky, Oily",
+                Option3: "Thick, soft, dark, wavy",
+                Quote: "Soon you will know your Prakriti. Cheers!"
+            },
+            {
+                Question: "What type of forehead you have ? ",
+                Option1: "Small, Irregular",
+                Option2: "Medium",
+                Option3: "Large, Attractive",
+                Quote: "Soon you will know your Prakriti. Cheers!"
+            },
+            {
+                Question: "How is your digestion going on? ",
+                Option1: "Irregular",
+                Option2: "Very Well",
+                Option3: "Weak",
+                Quote: "Soon you will know your Prakriti. Cheers!"
+            },
+            {
+                Question: "How often you get thirty ? ",
+                Option1: "Sometimes",
+                Option2: "Very Often",
+                Option3: "Very Rarely",
+                Quote: "Soon you will know your Prakriti. Cheers!"
+            },
+            {
+                Question: "What is your preferred food taste?",
+                Option1: "Sweet, Sour, Salty",
+                Option2: "Sweet, bitter, slightly bitter",
+                Option3: "Bitter, Slight bitter, Strong Taste",
+                Quote: "Soon you will know your Prakriti. Cheers!"
+            },
+            {
+                Question: "How much is your control on hunger? ",
+                Option1: "Irregular",
+                Option2: "Poor",
+                Option3: "Very Good",
+                Quote: "Soon you will know your prakriti!!"
+            },
+            {
+                Question: "How much is your food consumption? ",
+                Option1: "Irregular",
+                Option2: "Heavy",
+                Option3: "Normal",
+                Quote: "Soon you will know your prakriti!!"
+            }
+            // {
+            //     Question: "What are your bowel movements ? ",
+            //     Option1: "Irregular, Diarrhea, Constipation",
+            //     Option2: "Diarrhea",
+            //     Option3: "Constipation"
+            // }
+          ];
+
+
+
+
+
+
+
+
+
+          var currentIndex = 1; // Initialize the index to 0
+          const selectedValues = []; // Array to store selected radio button values
+          console.log("Script is working");
+          // Function to display the next value in the array
+
+
+        function solve(selectedValue){
+            var Vata=0;
+            var Pitta=0;
+            var Kapha=0;
+            for(let i=0;i<12;i++){
+                if(selectedValue[i] === '1'){
+                    Vata++;
+                }
+                else if(selectedValue[i] === '2'){
+                    Pitta++;
+                } 
+                else{
+                    Kapha++;
+                }
+            }
+
+            // Exception
+
+                if(selectedValue[7] === '1' ){
+                    Kapha+=0.5;
+                }
+                if(selectedValue[7] === '3' ){
+                    Vata+=0.5;
+                }
+                if(selectedValue[10] === '2' ){
+                    Kapha+=0.5;
+                }
+                if(selectedValue[10] === '2' ){
+                    Vata+=0.5;
+                }
+                if(selectedValue[10] === '1'){
+                    Pitta+=0.5;
+                }
+                if(selectedValue[11] === '2'){
+                    Vata+=0.5;
+                }
+                if(selectedValue[11] === '3'){
+                    Vata+=0.5;
+                }
+
+                let vata = (Vata/((Vata+Pitta+Kapha)))*100;
+                let pitta = (Pitta/((Vata+Pitta+Kapha)))*100;
+                let kapha = (Kapha/((Vata+Pitta+Kapha)))*100;
+                const obj = {
+                    VATA: vata,
+                    PITTA: pitta,
+                    KAPHA: kapha
+                }
+                return obj;
+        }
+
+
+
+
+
+
+          function displayNextValue() {
+            const selectedRadioButton = document.querySelector('input[name="radio"]:checked');
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            if (selectedRadioButton) {
+                selectedValues.push(selectedRadioButton.id);
+                console.log("Selected Radio Button: " + selectedRadioButton.id);
+                console.log(selectedValues);
+                selectedRadioButton.checked = false;
+            
+              if (currentIndex < MyQuestion.length) {
+
+                //    console.log("Displaying: " + nextValue);
+
+
+                //    future_change.innerHTML = MyQuestion[currentIndex].Question;
+                //    Fu1.innerHTML = MyQuestion[currentIndex].Option1;
+                //    Fu2.innerHTML = MyQuestion[currentIndex].Option2;
+                //    Fu3.innerHTML = MyQuestion[currentIndex].Option3;
+                targetElement.classList.add("flipp");
+
+                // chang2.innerHTML = MyQuestion[currentIndex+1].Quote;
+
+                  setTimeout(() => {
+                    ques_change.innerHTML = MyQuestion[currentIndex].Question;
+                    Op1.innerHTML = MyQuestion[currentIndex].Option1;
+                    Op2.innerHTML = MyQuestion[currentIndex].Option2;
+                    Op3.innerHTML = MyQuestion[currentIndex].Option3;
+                    // if(MyQuestion[currentIndex].Quote){
+                    chang1.innerHTML = MyQuestion[currentIndex].Quote;
+                    // if(currentIndex === 1){
+                    //     let bun = document.getElementsByClassName("button");
+                    //     console.log("yayyyy" + bun);
+                    //     bun.innerHTML = "Submit";   
+                    // }
+                    // if(currentIndex === 10)
+                    // {
+                    //     change.innerHTML("Soon you will know your prakriti!!")
+                    // }
+                    currentIndex++;
+                    targetElement.classList.remove("flipp");
+                    }, 1000);
+                    future_change.innerHTML = MyQuestion[currentIndex].Question;
+                    Fu1.innerHTML = MyQuestion[currentIndex].Option1;
+                    Fu2.innerHTML = MyQuestion[currentIndex].Option2;
+                    Fu3.innerHTML = MyQuestion[currentIndex].Option3;
+                    chang2.innerHTML = MyQuestion[currentIndex].Quote;
+                    // count();
+                  // Store the selected radio button value           
+              } else {
+                  console.log("End of array reached.");
+                  let soul = solve(selectedValues);
+                //    console.log(soul);
+                let radion = document.querySelectorAll('input[type="radio"]');
+                targetElement.classList.add("flipp");
+                let highest = Math.max(soul.VATA,soul.PITTA,soul.KAPHA);
+                let highname;
+                if(highest === soul.VATA){
+                    highname='VATA';
+                }else if(highest === soul.PITTA){
+                    highname='PITTA';
+                }
+                else
+                highname='KALPA';
+
+                soul.VATA=soul.VATA.toFixed(2)
+                soul.PITTA=soul.PITTA.toFixed(2)
+                soul.KAPHA=soul.KAPHA.toFixed(2)
+
+
+                setTimeout(() => {
+                    
+                ques_change.innerHTML = "Congrats, you are "+highname;
+                Op1.innerHTML = "Vata :"+soul.VATA+"%";
+                Op2.innerHTML = "Pitta :"+soul.PITTA+"%";
+                Op3.innerHTML = "Kalpa :"+soul.KAPHA+"%";
+                chang1.innerHTML = "Thanks for using this Questionaire, --By Harsh";
+                //  backer.classList.add("gayab");
+                div1.insertAdjacentHTML("afterend", lineBreak);
+                radion.forEach(function(radio) {
+                    radio.style.display = 'none';
+                });
+
+                //  currentIndex++;
+                targetElement.classList.remove("flipp");
+                }, 1000);
+                future_change.innerHTML = "Congrats, you are "+highname;
+                Fu1.innerHTML = "Vata : "+soul.VATA+"%";
+                Fu2.innerHTML = "Pitta : "+soul.KAPHA+"%";
+                Fu3.innerHTML = "Kalpa : "+soul.KAPHA+"%";
+                backer.style.top = '-516px';
+                //  backer.style.maxHeight = "415px";
+                div2.insertAdjacentHTML("afterend", lineBreak);
+                chang2.innerHTML = "Thanks for using this Questionaire, --By Harsh";
+
+                radion.forEach(function(radio) {
+                    radio.style.display = 'none';
+                });
+                let butt = document.getElementById("actionButton");
+                Op1.htmlFor="";
+                Op2.htmlFor="";
+                Op3.htmlFor="";
+                butt.innerHTML="";
+
+                //    console.log(selectedValues);
+              }
+            }
+            else{
+            console.log("Element is added");
+            // butt.classList.add('shaking');
+            // butt.addEventListener('', () => {
+            // butt.classList.remove('shaking');
+            //   });  
+            console.log("Check the check element");
+            }
+          }
+
+          // Attach click event to the button
+          document.getElementById("actionButton").addEventListener("click", displayNextValue);
+
+          // Get all radio buttons and the remove class button
+        const radios = document.querySelectorAll('.input');
+        const removeClassButton = document.getElementById('actionbutton');
+        console.log("this cript wrks");
+        // Function to add class to unchecked radios
+        const def = [
+            {"1":"one"},
+            {"2":"two"},
+            {"3":"three"}
+        ]
+        let a = document.getElementById("one");
+        let b = document.getElementById("two");
+        let c = document.getElementById("three");
+        function addClassToUncheckedRadios() {
+          radios.forEach(radio => {
+            if (!radio.checked) {
+                if(radio.id === '1'){
+                    a.classList.add('texty');
+                }
+                else if(radio.id === '2'){
+                    b.classList.add('texty');
+                }
+                else if(radio.id === '3'){c.classList.add('texty')}
+            //   radio.classList.add('texty');
+              console.log("Thid tpp");
+            }
+            if(radio.checked){
+                if(radio.id === '1'){
+                    a.classList.remove('texty');
+                }
+                else if(radio.id === '2'){
+                    b.classList.remove('texty');
+                }
+                else if(radio.id==='3'){c.classList.remove('texty')}  
+            }
+          });
+        }
+
+        // Function to remove class from all radios
+        function removeClassFromAllRadios() {
+            a.classList.remove('texty');
+            b.classList.remove('texty');
+            c.classList.remove('texty');
+        }
+
+        // Event listener for radio button click
+        radios.forEach(radio => {
+          radio.addEventListener('click', addClassToUncheckedRadios);
+        });
+
+        // Event listener for button click
+        removeClassButton.addEventListener('click', removeClassFromAllRadios);
+
+      </script>
+</body>
+</html>
